@@ -31,8 +31,10 @@ We will hire a Data Engineer first to establish the read replica, secure data mo
 - **What this buys:** Focused ownership of the two immediate technical needs and a foundation of documented, trustworthy historical data for later forecasting.
 - **What this costs:** Recruitment time and salaries for two different skill sets. Specialized forecasting work will be postponed or require temporary external help.
 - **What it costs the client if I am wrong:** The company might delay a valuable forecasting opportunity, or hiring the wrong skill mix could slow the replica rollout and reporting improvements.
-- **What would make me revisit this:** A funded, urgent forecasting use case with measurable value and suitable historical data, or evidence that the chosen hires cannot cover the reporting and infrastructure workload.
+- **What would make me revisit this:** Either hire starting more than 30 days after the planned start date triggers a management review of workload and sequencing. The budget assumes the Data Engineer starts in Month 1 and the Analytics Engineer in Month 3. Revisit the role mix if critical reliability, reporting, or complaint-response work cannot be covered, or if a funded forecasting use case has suitable historical data and measurable value. A review does not authorize a third data hire within the current two-hire limit.
 
 ## What this survives
 
-The first year of reporting improvements and gradual expansion into Nigeria if responsibilities remain manageable. Once dependable historical data and a validated forecasting need exist, Kloud Kart can reassess specialist hiring.
+The plan can respond to a hiring delay by preserving named interim ownership: the existing developer applies immediate export safeguards, Nana owns the complaint response, and Operations and Finance maintain business definitions and review controlled reports while the Analytics Engineer role is vacant. None of these responsibilities waits for recruitment, and the complaint deadline is unchanged.
+
+Defer historical-data expansion and forecasting before sacrificing website safeguards or complaint work. If the existing team cannot sustain the essential work, management must replan the delivery dates and assess limited setup advice within the available budget; it must not assume unlimited developer capacity or silently add a third hire. Growth in Nigeria requires a fresh workload review. These contingencies are proposed arrangements, not evidence that recruitment or workload capacity has been verified.

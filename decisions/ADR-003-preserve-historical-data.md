@@ -31,8 +31,10 @@ After checking existing history and second-server capacity, we will schedule col
 - **What this buys:** A growing, structured record of product demand that can support future analysis without new heavy queries on production. The data can be migrated later if a warehouse becomes justified.
 - **What this costs:** A separate writable database or instance, scheduled collection jobs, storage, security, quality checks, and monitoring on the second server.
 - **What it costs the client if I am wrong:** Collection jobs may consume too much of the second server's capacity and degrade reporting; incomplete or misleading history could produce poor forecasts and inventory decisions.
-- **What would make me revisit this:** Insufficient server capacity, new data sources or analytical demands that exceed this design, or a need to capture changes that daily collection misses.
+- **What would make me revisit this:** Historical collection that causes a reporting deadline to be missed is paused or reduced immediately. A forecast that storage will run out within 30 days at the measured growth rate triggers a capacity and retention review. Resume collection only after checking that reporting can meet its target and sufficient space is available. New sources that cannot be accommodated, or a verified need for changes that daily snapshots miss, trigger a review of separate storage or more detailed change capture.
 
 ## What this survives
 
-Gradual business growth and an initial forecasting pilot, provided capacity and data quality remain acceptable. Daily snapshots cannot reveal every within-day price or stock change; more detailed change capture may be needed if the business later requires it.
+Gradual growth can be accommodated by collecting only the selected product history, scheduling collection outside reporting windows, and applying agreed retention periods. If history competes with daily reporting, protect reporting first, pause historical jobs, and record the resulting gaps. Assess rescheduling, storage capacity, and separate hosting before committing to a larger platform; do not invent missing history or remove records outside the approved retention policy to hide a capacity problem.
+
+Daily snapshots cannot reveal every within-day price or stock change. An initial forecasting pilot remains conditional on verifying suitable history and quality; neither capacity nor forecasting readiness has been demonstrated with Kloud Kart data. The 30-day storage-headroom trigger is a proposed operating rule, not a measured result.
