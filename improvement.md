@@ -38,7 +38,7 @@ I selected the following rules for this illustrative prototype. They are plannin
 
 For these rules, apply High priority first; otherwise apply Medium priority if its threshold is met. Changes outside the warning bands receive "No warning". Compare complete, equivalent weeks using consistent business definitions.
 
-For orders, sales, refunds, and product units, percentage change is `(current week - previous week) / previous week x 100`. Use unrounded values to assign priorities and round only the displayed change. A cancellation-rate change uses percentage points: `8.2% - 5.1% = 3.1 percentage points`, which meets the High threshold.
+For orders, sales, refunds, and product units, percentage change is `(current week - previous week) / previous week x 100`. Use unrounded values to assign priorities and round only the displayed change. In the fictional example below, the cancellation-rate change uses percentage points: `8.2% - 5.1% = 3.1 percentage points`, which meets the High threshold. The two rates are invented demonstration inputs, not calculated from actual customer orders.
 
 If a required figure is missing, mark the measure "Manual review" rather than assigning a priority. For percentage-change measures, a zero previous-week value also requires manual review because the percentage change is undefined. A valid cancellation rate of zero can still be compared using percentage points.
 
@@ -61,7 +61,7 @@ The following figures are fictional and demonstrate how the report would work. T
 
 | Identified issue | Priority | Responsible department | Recommended action |
 | --- | --- | --- | --- |
-| Cancellation rate increased by 3.1 percentage points. | High | Operations | Investigate cancellation reasons, payment failures and delivery issues. |
+| In this fictional example, cancellation rate increased by 3.1 percentage points. | High | Operations | Investigate cancellation reasons, payment failures and delivery issues. |
 | Refund value increased by 21.7%. | Medium | Finance | Review refund reasons and identify recurring causes. |
 | Product A units sold decreased by 17.6%. | Medium | Inventory / Commercial | Check stock availability, pricing, promotions and product performance. |
 

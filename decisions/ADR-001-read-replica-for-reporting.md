@@ -8,6 +8,8 @@
 
 Kloud Kart's live website and MySQL database share one server. Large Monday exports slowed the website twice last month, putting customer orders and revenue at risk. A second server is already approved, and the existing developer has MySQL experience. Reporting must be separated without interrupting live orders or stock updates.
 
+**Evidence basis and limits:** These are facts supplied by the brief, not independently observed incidents. Moving reporting queries to another server is an engineering judgement supported by MySQL's documented [replica setup with existing data](https://dev.mysql.com/doc/refman/8.4/en/replication-setup-replicas.html). That documentation establishes an available mechanism, not proof that Kloud Kart's hardware can meet the target. The reference is for MySQL 8.4; the installed version, configuration, table types, and safe initial-copy method remain unverified. No dataset, server access, pipeline demonstration, or capacity benchmark was supplied. The developer and Data Engineer must confirm compatibility and a non-disruptive setup method before copying; the reporting and pressure-test acceptance checks below remain future work.
+
 ## Decision
 
 We will configure a MySQL read replica on a second server and direct reporting queries to it. The production database will remain responsible for customer transactions and live inventory.

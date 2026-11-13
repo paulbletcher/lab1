@@ -182,6 +182,14 @@ The Data Engineer and developer will check the MySQL version, table types, backu
 
 **Trade-offs:** Additional server costs, replication delays, monitoring, and security requirements.
 
+#### Evidence basis and acceptance checks
+
+The brief supplies the 40 GB database size, two recent export-related slowdowns, existing MySQL experience, approved second server, and daily reporting requirement. These facts support separating heavy reporting from checkout with familiar technology. This is an engineering judgement, not an observed performance improvement. MySQL documents [setting up replicas with existing data](https://dev.mysql.com/doc/refman/8.4/en/replication-setup-replicas.html); the reference describes MySQL 8.4 and does not establish which version Kloud Kart runs or whether its initial-copy method is safe.
+
+No server access, transaction dataset, incident logs, pipeline demonstration, or capacity test was provided. The version, configuration, hardware, production load, and storage headroom remain unknown. Before migration, the developer and Data Engineer must confirm compatibility, test backup restoration and a non-disruptive initial copy, and record a representative checkout-performance baseline. Then compare matched reporting periods for report completion, record completeness, replication delay, checkout response times, errors, and blocked orders. Record the exact workloads and timings so the comparison can be repeated. Stop background work that disrupts live orders; a reporting copy is not a replacement for a tested backup.
+
+Acceptance requires complete previous-day reports by 08:00 Ghana time, a successful refresh within 24 hours, and four consecutive Monday exports without reporting-related website slowdowns. Test current and proposed doubled activity before claiming capacity at 8,000 orders/day, including busy periods. These are proposed checks, not completed results; [ADR-001](decisions/ADR-001-read-replica-for-reporting.md) records the failure response and alternatives.
+
 ### 2. Strengthen Customer-Data Protection
 
 Customer-data exports should be limited to authorized employees using approved company systems. Files must be stored securely and shared only through approved platforms.
@@ -241,6 +249,39 @@ The following GHS figures are planning assumptions, not confirmed salaries or su
 The employer pension allowance follows [SSNIT's published 13% contribution](https://www.ssnit.org.gh/become-an-employer/). No discretionary bonuses or extra benefits allowance are included. Implementation uses the two hires and existing developer; existing employee equipment is assumed reusable. Actual employment terms, supplier charges, and equipment availability require confirmation before commitments.
 
 This total includes the approved hires and second server; reconcile funding already allocated before requesting additional money. The illustrative reporting-time savings alone do not repay this investment, which also addresses operational reliability and customer-data protection.
+
+#### Budget calculation and input sources
+
+All amounts below are GHS. Except for the cited employer contribution rate, inputs were selected as planning assumptions for this proposal. No salary survey, supplier quotation, or detailed server specification was provided; these are not verified market prices.
+
+| Input | Calculation | Basis and confirmation needed |
+| --- | --- | --- |
+| Data Engineer | 12,000 x 12 = 144,000 | Assumed monthly gross basic pay, starting Month 1. Confirm recruitment offer and start date. |
+| Analytics Engineer | 10,000 x 10 = 100,000 | Assumed monthly gross basic pay, starting Month 3. Confirm recruitment offer and start date. |
+| Employer pension allowance | (144,000 + 100,000) x 13% = 31,720 | [SSNIT's employer guidance](https://www.ssnit.org.gh/become-an-employer/) states the employer adds 13% of basic salary. Confirm payroll treatment and employment terms. The employee deduction is not an extra employer cost on top of gross pay. |
+| Second-server operation | 1,000 x 12 = 12,000 | Assumed monthly operating allowance. No provider or specification selected; confirm capacity, location, invoice/tax basis, and actual charges. |
+| Backup storage and monitoring | 500 x 12 = 6,000 | Assumed shared monthly allowance, not a product quote. Confirm storage, restoration, monitoring, and secure evidence-storage needs. |
+| Recruitment, training, limited setup advice | 7,500 once | Combined planning allowance, not three separate allowances. Scope advice and confirm fees before use. |
+
+Reproduction: salaries `144,000 + 100,000 = 244,000`; subtotal `244,000 + 31,720 + 12,000 + 6,000 + 7,500 = 301,220`; contingency `301,220 x 0.05 = 15,061`; estimated total `301,220 + 15,061 = 316,281`. Rounding up to the next GHS 10,000 gives a GHS 320,000 planning allowance, GHS 3,719 above the estimate. That rounding headroom is separate from the included contingency; it is not another measured cost.
+
+The forecast assumes reusable equipment and existing company-managed access controls and document storage. It excludes discretionary bonuses, additional benefits, new warehouse subscriptions, and a third hire. The existing developer's participation has an opportunity cost but no additional salary is budgeted here; management must confirm available time. Supplier taxes, foreign-currency exposure, equipment replacement, and any extra employment obligations are unverified and may change the estimate. Reprice before commitments rather than assuming the contingency covers every gap. Already-approved funding reduces any new funding request, not the total cost of the programme.
+
+#### Value case and spending review
+
+The diagnosis illustrates approximately GHS 22,880/year of reporting and reconciliation time plus approximately GHS 7,000/year of lost website contribution: approximately GHS 29,880 combined. These inputs are invented scenarios, not measured savings. Staff time released is capacity for other work, not automatically a cash saving. Even recovering all of that illustrative value would leave approximately `316,281 - 29,880 = GHS 286,401` of the first-year estimate uncovered. At the rounded GHS 320,000 allowance the gap would be approximately GHS 290,120. Full recovery is an optimistic comparison, not a promised return.
+
+Two salaries and employer pensions account for `244,000 + 31,720 = GHS 275,720`, about 87% of the estimate. Other costs including contingency total GHS 40,561. The brief budgets two hires and pre-approves a second server, but that approval does not establish financial payback. This plan buys operating capability and risk controls; the available evidence cannot show that the full programme is the cheapest option or that its benefits exceed its cost.
+
+The following proposed outcomes bound what Nana should expect without inventing a value for avoided fines or lost trust:
+
+| Outcome | Bounded commitment and evidence | Financial limit |
+| --- | --- | --- |
+| Less disruption to customers | Four consecutive Monday exports without reporting-related website slowdowns; compare matched checkout-performance and error records. | Count recovered contribution only if incident and transaction records support it; the approximately GHS 7,000 scenario is not proven. |
+| Dependable Monday figures | Four consecutive reports validated by Operations and Finance; log preparation and reconciliation time before and after automation. | Released time has an illustrative value up to GHS 22,880 only under the original hours/rates and full recovery; real savings may be lower, zero, or offset by maintenance. |
+| Traceable customer-data handling | Record every new approved export from the control launch; log any bypass as an incident. Submit the complaint response before the confirmed deadline with verification evidence and explicit unresolved gaps. | Do not price avoided penalties or claim complete deletion without evidence. Record failures as well as successes. |
+
+At the end of Q2, Nana and Finance review actual spend, staff availability, time released, reporting disputes, export/deletion exceptions, and website incidents against the baseline. Continue essential website safeguards and complaint obligations, but defer discretionary history expansion, forecasting, and platform purchases if outcomes or affordability do not justify them. If hiring or delivery fails, replan the scope and dates under ADR-005 rather than adding a third hire. Any claim of full financial payback needs independently supported additional benefits sufficient to cover the remaining gap; none are established by this brief.
 
 ### Expected Outcomes and Verification
 
@@ -322,6 +363,14 @@ The brief's 90-day period is the case constraint, not a claim about a general st
 - Remaining gaps, further actions and owners, the submitted response, and proof of submission.
 
 For backups, document retention and access restrictions. Ensure deletion instructions are reapplied before restored data returns to use. Distinguish verified removal from data that remains in a restricted backup; do not claim physical erasure without evidence.
+
+### Audit-trail location, access, and retention
+
+**Proposed location, not a deployed system:** Use a restricted folder and case register in company-managed document storage, with the logical path `Governance/Complaints/<case-id>/`. Store the complaint log, evidence index, dated technical verification records, recipient confirmations, retention exceptions, management review, response, and submission receipt there. The case register links each action to an owner, date, result, and evidence item. Use a case identifier in filenames and keep personal data to what the investigation needs. Do not place real complaint evidence or customer data in this submission repository.
+
+**Access:** Nana and the management-designated privacy lead have case-management access. The developer and Data Engineer receive only the case-specific access needed to contribute technical evidence. Marketing and Finance submit their evidence through approved company channels without automatic access to the whole case. Management authorises any additional reviewer or regulator disclosure; provide read-only access or a controlled copy as appropriate. Use named company accounts, log access and permission changes, disable public sharing, and avoid personal email or personal drives. Preserve dated versions and corrections so evidence is not silently overwritten. Management must confirm that the chosen company storage supports these controls before using it.
+
+**Retention:** Nana and the privacy lead record the applicable evidence-retention period and reason when opening the case, confirm it with management or qualified advice where needed, and review it at case closure. Retain only evidence needed for the complaint and documented obligations; restrict any necessary retained personal data and securely delete it when its approved period ends. The brief's 90-day response deadline is not an evidence-retention rule. No statutory retention duration or existing company platform was provided, so neither is asserted here. The storage and access controls are implementation tasks within the existing allowances, subject to cost confirmation.
 
 ### First-week compliance checks
 

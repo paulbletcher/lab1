@@ -8,9 +8,19 @@
 
 Kloud Kart may later use machine learning for demand forecasting. However, the brief does not confirm what sales, price, or stock history the operational database already retains. A read replica reflects current source changes and does not automatically preserve earlier values. Kloud Kart has limited staff and approximately 40 GB of structured operational data.
 
+**Proposed historical-store field policy:** Preserve product demand at product/date level, without customer-level linkage. No source schema was provided, so the following are logical fields to map and review before implementation, not verified MySQL column names.
+
+| Treatment | Logical fields |
+| --- | --- |
+| Allow for the stated purpose | Business date and snapshot time; product/SKU identifier; quantities sold, cancelled, returned, and in stock; product price and sales value. Keep currency with monetary values. |
+| Allow only if the Ghana/Nigeria comparison needs it | Aggregate market/country, without delivery addresses or customer identifiers. |
+| Exclude | Customer IDs, names, emails, phone numbers, delivery/billing addresses, account/payment credentials, payment identifiers, IP/device identifiers, free-text notes, and individual order IDs. |
+
+Do not introduce hashed or pseudonymous customer IDs for this product-level purpose. Any future need for customer linkage requires a separately documented purpose, field review, access controls, and deletion/retention handling before collection. Product-level aggregation is not a claim that every possible re-identification risk has been eliminated. This policy applies to the historical store; the operational replica still requires protection as a copy of the source database.
+
 ## Decision
 
-After checking existing history and second-server capacity, we will schedule collection of selected sales, price, and inventory records from the read replica into a separate writable historical-data store on that server. We will avoid unnecessary customer-identifying information and defer a dedicated warehouse or lakehouse.
+After checking existing history and second-server capacity, we will schedule collection of selected sales, price, and inventory records from the read replica into a separate writable historical-data store on that server. We will enforce the product-level field policy above and defer a dedicated warehouse or lakehouse.
 
 ## Alternatives considered
 
